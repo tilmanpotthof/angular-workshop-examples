@@ -35,12 +35,15 @@
         {{ 140 - myText.length }}
       </div>
     </div>
-    <div class="col-xs-6 col-xs-offset-1">
+    <div class="col-xs-6 col-xs-offset-1"
+         ng-init="c=255;"
+         style="background-color: rgb({{ c }}, {{ c }}, {{ c }})">
       <h4>Weitere Beispiele</h4>
       <input type="text" ng-model="someText" class="form-control" />
       <p><em>Reversed text:</em> {{ someText.split("").reverse().join("") }}</p>
       <p><em>Uppercase:</em> {{ someText.toUpperCase() }}</p>
       <p><em>Split words:</em> {{ someText.split(" ") }}</p>
+      <p>Background grey scale: <input type="number" ng-model="c" min="0" max="255" /></p>
     </div>
   </div>
   <hr/>
@@ -82,8 +85,6 @@
     </div>
 
   </div>
-
-
-
+</div>
 </body>
 </html>
