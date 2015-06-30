@@ -1,0 +1,42 @@
+{
+  "mockDirectory": "apimocker",
+  "quiet": false,
+  "port": "8001",
+  "latency": 100,
+  "allowedHeaders": ["Content-Type"],
+  "webServices": {
+    "response/empty/ok": {
+      "mockFile": "responses/empty.json",
+      "httpStatus": 200,
+      "verbs": [
+        "get",
+        "post"
+      ]
+    },
+    "response/empty/error": {
+      "mockFile": "responses/empty.json",
+      "httpStatus": 400,
+      "verbs": [
+        "get",
+        "post"
+      ]
+    },
+    "static/pdf/download": {
+      "contentType": "application/pdf",
+      "headers": {
+        "Content-Disposition": "inline; filename='agenda.pdf'"
+      },
+      "mockFile": "responses/agenda.pdf",
+      "httpStatus": 200,
+      "verbs": ["get"]
+    },
+    "user/:id": {
+      "switch": "id",
+      "verbs": [
+        "get"
+      ],
+      "mockFile": "responses/user/user.json"
+
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="de">
+  <meta charset="UTF-8">
+  <title>angular-workshop-setup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <script src="../node_modules/angular/angular.js"></script>
+  <script src="http://localhost:35729/livereload.js"></script>
+</head>
+<body ng-app>
+
+<div class="container" ng-init="name = 'Bernd'">
+  <h2>Hello {{ name }}!</h2>
+  <input type="text" ng-model="name" />
+</div>
+
+</body>
+</html>
