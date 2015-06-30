@@ -36,7 +36,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'ngtemplates',
-    'karma:helloWorld'
+    'karma:all'
   ]);
 
   grunt.registerTask('default', [
