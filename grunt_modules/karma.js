@@ -20,8 +20,8 @@ module.exports = (function() {
       options: {
         configFile: 'karma.conf.js',
         files: [
-          'dist/js/vendor.js',
-          'dist/js/app.js',
+          'generated/dist/js/vendor.js',
+          'generated/dist/js/app.js',
           'node_modules/angular-mocks/angular-mocks.js'
         ].concat(
           config.allSpec

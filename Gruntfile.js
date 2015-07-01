@@ -14,8 +14,6 @@ module.exports = function (grunt) {
     'clean',
     'ngtemplates',
     'concat',
-    'copy:assets',
-    'copy:htmlmocks',
     'ngdocs'
   ]);
 
