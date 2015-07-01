@@ -1,0 +1,24 @@
+<div class="form-group">
+  <label for="vorname">Vorname</label>
+  <input type="text" ng-model="user.vorname" class="form-control" id="vorname" placeholder="Vorname">
+</div>
+<div class="form-group">
+  <label for="nachname">Nachname</label>
+  <input type="text" ng-model="user.nachname" class="form-control" id="nachname" placeholder="Nachname">
+</div>
+<div class="checkbox">
+  <label>
+    <input type="checkbox" ng-model="user.macUser"> Mac-User
+  </label>
+  <label>
+    <input type="checkbox" ng-model="user.bremenFan"> Bremen-Fan
+  </label>
+  <label>
+    <input type="checkbox" ng-model="user.vegetarier"> Vegetarier
+  </label>
+</div>
+<select class="form-control" ng-model="user.lieblingsessen">
+  <option>Pizza</option>
+  <option>Pommes</option>
+  <option>Salat</option>
+</select>
