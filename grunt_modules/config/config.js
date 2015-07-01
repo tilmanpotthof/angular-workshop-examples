@@ -62,6 +62,9 @@ module.exports = (function() {
   }
 
   addModule('helloWorld').withTemplates();
+  addModule('userManagement').withTemplates().withDependencies(['commons']);
+  addModule('commons').withTemplates();
+
 
   return config;
 })();
