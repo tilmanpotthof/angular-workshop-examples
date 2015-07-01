@@ -5,6 +5,7 @@ module.exports = (function() {
 
   var CONSTANTS = {
     MODULE_SRC: _.template('src/app/<%= moduleName %>/**/*.module.js'),
+    DEST: _.template('generated/dist/js/<%= moduleName %>.js'),
     SRC_WITHOUT_SPEC: _.template('src/app/<%= moduleName %>/**/!(*.spec).js'),
     TEST_SPEC: _.template('src/app/<%= moduleName %>/**/*.spec?(.config).js'),
     TEMPLATE_SRC: _.template('src/app/<%= moduleName %>/**/*.html'),
@@ -14,6 +15,7 @@ module.exports = (function() {
   function BuildModule(moduleName) {
     this.moduleName = moduleName;
     this.src = [CONSTANTS.MODULE_SRC(this), CONSTANTS.SRC_WITHOUT_SPEC(this)];
+    this.dest = CONSTANTS.DEST(this);
     this.spec = [CONSTANTS.TEST_SPEC(this)];
     this.dependencies = [];
   }

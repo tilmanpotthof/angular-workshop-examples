@@ -2,8 +2,9 @@ module.exports = function() {
   'use strict';
 
   var config = require('./config/config.js');
+  var _ = require('underscore');
 
-  return {
+  var concatOptions = {
     app: {
       src: [
         'src/app/**/*.module.js',
@@ -22,4 +23,20 @@ module.exports = function() {
       dest: 'generated/dist/js/vendor.js'
     }
   };
+
+  _.each(config.modules, function(modulePaths, moduleName) {
+    concatOptions[moduleName] = {
+      src: modulePaths.src
+        .concat(
+        modulePaths.templates.dest,
+        _.flatten(modulePaths.dependencies.map(function(dependency) {
+          return config.modules[dependency].src.concat(config.modules[dependency].templates.dest);
+        }))
+      ),
+      dest: modulePaths.dest
+
+    };
+  });
+
+  return concatOptions;
 };
