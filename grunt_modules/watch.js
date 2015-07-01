@@ -40,7 +40,7 @@ module.exports = (function() {
       files: modulePaths.src.concat(modulePaths.templates.dest),
       tasks: [
         'jshint',
-        'concat',
+        'concat:' + moduleName,
         'karma:' + moduleName
       ]
     };
