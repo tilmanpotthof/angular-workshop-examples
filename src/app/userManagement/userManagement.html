@@ -10,7 +10,7 @@
     </div>
     <div class="col-xs-6">
       <h2>Benutzerliste</h2>
-      <pre><code>{{ users | json }}</code></pre>
+      <pre ng-if="DEBUG"><code>{{ users | json }}</code></pre>
       <table class="table">
         <thead>
         <tr>
