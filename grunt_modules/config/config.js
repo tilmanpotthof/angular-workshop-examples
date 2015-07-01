@@ -25,10 +25,12 @@ module.exports = (function() {
       this.templates = {
         src: CONSTANTS.TEMPLATE_SRC(this),
         dest: CONSTANTS.TEMPLATE_DEST(this)
-      }
+      };
+      return this;
     },
     withDependencies: function (dependencies) {
       this.dependencies = dependencies;
+      return this;
     }
   });
 
