@@ -26,4 +26,18 @@ angular.module('userManagement').controller('UserManagementController', function
   $scope.removeUser = function (user) {
     arrayRemove($scope.users, user);
   };
+
+  $scope.getPropertiesString = function (user) {
+    var properties = [];
+    if (user.bremenFan) {
+      properties.push('Bremen-Fan');
+    }
+    if (user.vegetarier) {
+      properties.push('Vegetarier');
+    }
+    if (user.macUser) {
+      properties.push('Mac-User');
+    }
+    return properties.join(', ');
+  };
 });
