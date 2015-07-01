@@ -21,8 +21,5 @@
     <input type="checkbox" ng-model="user.vegetarier"> Vegetarier
   </label>
 </div>
-<select class="form-control" ng-model="user.lieblingsessen">
-  <option>Pizza</option>
-  <option>Pommes</option>
-  <option>Salat</option>
+<select class="form-control" ng-model="user.lieblingsessen" ng-options="meal.name for meal in meals">
 </select>

@@ -19,6 +19,7 @@
           <th>Vorname</th>
           <th>Nachname</th>
           <th>Eigenschaften</th>
+          <th>Lieblingsessen</th>
           <th></th>
         </tr>
         </thead>
@@ -54,6 +55,15 @@
               <label>
                 <input type="checkbox" ng-model="user.vegetarier" /> Vegetarier
               </label>
+            </span>
+          </td>
+          <td>
+            <span ng-show="!editing">
+              {{ user.lieblingsessen.name }}
+            </span>
+            <span ng-show="editing">
+              <select class="form-control" ng-model="user.lieblingsessen" ng-options="meal.name for meal in meals">
+              </select>
             </span>
           </td>
           <td>
