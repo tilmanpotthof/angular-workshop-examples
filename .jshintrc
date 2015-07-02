@@ -136,7 +136,8 @@
     "inject": false,
     "require": false,
     "moment": false,
-    "_": false
-
+    "_": false,
+    "xdescribe": false,
+    "xit": false
   }
 }

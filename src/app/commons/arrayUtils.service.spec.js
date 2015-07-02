@@ -1,4 +1,4 @@
-describe('service:arrayUtils', function () {
+xdescribe('service:arrayUtils', function () {
   'use strict';
 
   var arrayUtils;
