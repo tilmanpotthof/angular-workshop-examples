@@ -1,10 +1,24 @@
-angular.module('userManagement').controller('UserManagementController', function ($scope) {
+angular.module('userManagement').controller('UserManagementController', function ($scope, $log, $http) {
   'use strict';
 
-  function arrayRemove(array, element) {
-    var index = array.indexOf(element);
-    array.splice(index, 1);
+  console.log($log, $http);
+
+  $scope.userCount = 5;
+
+  function loadUsers() {
+    $http({
+      url: 'http://api.randomuser.me/',
+      params: {
+        results: $scope.userCount
+      }
+    }).success(function (response) {
+      $scope.users = response.results.map(function (result) {
+        return result.user;
+      });
+    });
   }
+
+  $scope.$watch('userCount', loadUsers);
 
   function initUser() {
     $scope.user = {};
@@ -12,12 +26,7 @@ angular.module('userManagement').controller('UserManagementController', function
 
   initUser();
 
-  var predefinedUser = {
-    vorname: 'Tilman',
-    nachname: 'Potthof'
-  };
-
-  $scope.users = [predefinedUser];
+  $scope.users = [];
 
   $scope.meals = [{
     id: 1,
