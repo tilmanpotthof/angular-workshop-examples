@@ -1,0 +1,25 @@
+<div>
+  <h2>User Detail Page</h2>
+  <div>
+    <pre ng-if="DEBUG">{{ user() | json }}</pre>
+    <pre ng-if="DEBUG">{{ userToEdit | json }}</pre>
+
+    <a href="#/user-management"><small>Zurück</small></a>
+
+    <h3>
+      {{ user().lastname }}, {{ user().firstname }}
+      <button ng-click="editOrSave(userToEdit)"
+              class="btn"
+              ng-class="{'btn-warning': !isEditing(), 'btn-success': isEditing()}">
+        <span class="glyphicon" ng-class="{'glyphicon-pencil': !isEditing(), 'glyphicon-ok': isEditing()}"></span>
+      </button>
+    </h3>
+
+    <div ng-hide="isEditing()">
+      Besondere Eigenschaften: {{ (user() | displayUserProperties) || '-' }}
+    </div>
+    <form  ng-show="isEditing()">
+      <div user-form="userToEdit" headline="Neuer Benutzer"></div>
+    </form>
+  </div>
+</div>

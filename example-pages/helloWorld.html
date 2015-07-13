@@ -28,10 +28,11 @@
       <p>true ? = {{ true ? 'YES' : 'NO' }}</p>
       <p>false ? = {{ false ? 'YES' : 'NO' }}</p>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-3" ng-init=" myText='' ">
       <h4>Zeichenzähler</h4>
       <textarea ng-model="myText" class="form-control" rows="3"></textarea>
-      <div class="small text-right alert" ng-class="{'alert-danger': myText.length > 140 }">
+      <div class="small text-right alert"
+           ng-class="{'alert-success': myText.length <= 140,'alert-danger': myText.length > 140 }">
         {{ 140 - myText.length }}
       </div>
     </div>
@@ -42,8 +43,8 @@
       <input type="text" ng-model="someText" class="form-control" />
       <p><em>Reversed text:</em> {{ someText.split("").reverse().join("") }}</p>
       <p><em>Uppercase:</em> {{ someText.toUpperCase() }}</p>
-      <p><em>Split words:</em> {{ someText.split(" ") }}</p>
-      <p>Background grey scale: <input type="number" ng-model="c" min="0" max="1" step="0.1"/></p>
+      <p><em>Split words:</em> {{ someText.split(" ") | orderBy:true }}</p>
+      <p>Background opacity: <input type="number" ng-model="c" min="0" max="1" step="0.1"/></p>
       <ul>
         <li ng-repeat="word in someText.split(' ')">
           {{ word }}

@@ -3,49 +3,72 @@
     <h1>Benutzerverwaltung</h1>
 
     <div class="col-xs-3">
-      <h3>Neuer Benutzer</h3>
 
-      <form ng-submit="addUser(user)">
-        <div ng-include="'app/userManagement/userFormFields.html'"></div>
+      <form ng-submit="addUser(newUser)">
+        <div user-form="newUser" headline="Neuer Benutzer"></div>
         <button class="btn btn-default">Benutzer hinzufügen</button>
       </form>
     </div>
     <div class="col-xs-9">
       <h3>Benutzerliste</h3>
-      <pre ng-if="DEBUG"><code>{{ users | json }}</code></pre>
-      <input type="number" ng-model="userCount"/>
+      <pre ng-if="DEBUG"><code>{{ userService.getUsers() | json }}</code></pre>
+      <div class="well">
+        <h5>Anzeige Einstellungen</h5>
+        <pre ng-if="DEBUG"><code>{{ filter| json }}</code></pre>
+
+        <label>Namens Filter</label>
+        <input type="text" ng-model="filter.name"/>
+        <br/>
+
+        <label>Geschlecht</label>
+        <select ng-model="filter.gender" ng-options="gender.key as gender.label for gender in genders">
+        </select>
+        <br/>
+
+        <label>
+          <input type="checkbox" ng-model="filter.enableVowelFilter"/>
+          Vokale filtern
+        </label>
+      </div>
+
       <table class="table">
         <thead>
         <tr>
           <th>Vorname</th>
           <th>Nachname</th>
+          <th>Geschlecht</th>
           <th>Eigenschaften</th>
           <th>Lieblingsessen</th>
           <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="user in userService.getUsers()" ng-class="{'success': user.bremenFan}">
+
+        <tr ng-repeat="user in userService.getUsers() | filter:userFilter"
+            ng-class="{'success': user.bremenFan}">
           <td>
             <img src="{{ src }}">
             <span ng-show="!editing">
-              {{ user.name.first }}
+              {{ user.firstname | eliminateVowels:!filter.enableVowelFilter }}
             </span>
             <span ng-show="editing">
-              <input type="text" ng-model="user.name.first" class="form-control"/>
+              <input type="text" ng-model="user.firstname" class="form-control"/>
             </span>
           </td>
           <td>
             <span ng-show="!editing">
-              {{ user.name.last }}
+              {{ user.lastname | eliminateVowels:!filter.enableVowelFilter }}
             </span>
             <span ng-show="editing">
-              <input type="text" ng-model="user.name.last" class="form-control"/>
+              <input type="text" ng-model="user.lastname" class="form-control"/>
             </span>
           </td>
           <td>
+           {{ user.gender }}
+          </td>
+          <td>
             <span ng-show="!editing">
-              {{ getPropertiesString(user) }}
+              {{ user | displayUserProperties }}
             </span>
             <span ng-show="editing">
               <label>
@@ -69,6 +92,9 @@
             </span>
           </td>
           <td>
+            <a href="#/user-detail-page/{{user.guid}}" class="btn btn-info">
+              <span class="glyphicon glyphicon-search"></span>
+            </a>
             <button ng-click="editing = !editing" class="btn btn-warning">
               <span class="glyphicon" ng-class="{'glyphicon-pencil': !editing, 'glyphicon-ok': editing}"></span>
             </button>

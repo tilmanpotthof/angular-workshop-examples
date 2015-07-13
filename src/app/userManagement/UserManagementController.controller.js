@@ -1,44 +1,51 @@
-angular.module('userManagement').controller('UserManagementController', function ($scope, $log, randomUserApi, meals) {
+angular.module('userManagement').controller('UserManagementController', function($scope, $log, randomUserApi, meals) {
   'use strict';
-
-  $scope.userCount = 5;
 
   $scope.userService = randomUserApi;
 
-  randomUserApi.reloadUsers($scope.userCount);
+  $scope.filter = {};
 
-  $scope.users = randomUserApi.getUsers;
+  function containsWord(haystack, needle) {
+    return haystack.indexOf(needle) >= 0;
+  }
 
-  $scope.$watch('userCount', randomUserApi.reloadUsers);
+  $scope.userFilter = function(user) {
+    var filter = $scope.filter;
 
+    if (filter.name && !(containsWord(user.firstname, filter.name) || containsWord(user.lastname, filter.name))) {
+      return false;
+    }
+    if (filter.gender && filter.gender !== user.gender) {
+      return false;
+    }
+    return true;
+  };
 
+  $scope.genders = [
+    {
+      label: '-'
+    },
+    {
+      label: 'Mann',
+      key: 'male'
+    },
+    {
+      label: 'Frau',
+      key: 'female'
+    }
+  ];
 
   function initUser() {
-    $scope.user = {};
+    $scope.newUser = {};
   }
 
   initUser();
 
-  $scope.users = [];
-
   $scope.meals = meals;
 
-  $scope.addUser = function (user) {
+  $scope.addUser = function(user) {
     randomUserApi.addUser(user);
     initUser();
   };
-
-  $scope.getPropertiesString = function (user) {
-    var properties = [];
-    if (user.bremenFan) {
-      properties.push('Bremen-Fan');
-    }
-    if (user.vegetarier) {
-      properties.push('Vegetarier');
-    }
-    if (user.macUser) {
-      properties.push('Mac-User');
-    }
-    return properties.join(', ');
-  };
-});
+})
+;

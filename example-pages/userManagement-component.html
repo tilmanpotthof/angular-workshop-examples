@@ -6,10 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   <script src="../node_modules/angular/angular.js"></script>
+  <script src="../node_modules/angular-route/angular-route.js"></script>
+
 </head>
 <body ng-app="userManagement">
 
-<div ng-include=" 'app/userManagement/userManagement.html' "></div>
+<div>
+  <label>
+    <input type="checkbox" ng-model="DEBUG"/>
+    DEBUG
+  </label>
+</div>
+<div ng-view></div>
 
 <script src="../generated/dist/js/userManagement.js"></script>
 <script src="http://localhost:35729/livereload.js"></script>
